@@ -1,0 +1,29 @@
+<!--pages/userInfo/userInfo.wxml-->
+<view class="box">
+  <view class="content">
+    <view class="line first">
+      <text class="title">员工编号</text>
+      <text>{{info.accId}}</text>
+    </view>
+    <view class="line">
+      <text class="title">姓名</text>
+      <text>{{info.username}}</text>
+    </view>
+    <view class="line">
+      <text class="title">性别</text>
+      <text>{{info.sex === 'm' ? '男' : '女'}}</text>
+    </view>
+    <view class="line">
+      <text class="title">联系电话</text>
+      <text>{{info.mobile}}</text>
+    </view>
+    <view class="line">
+      <text class="title">所在厂区</text>
+      <text>{{info.depName}}</text>
+    </view>
+    <view class="line">
+      <text class="title">身份</text>
+      <text>{{info.roleName}}</text>
+    </view>
+  </view>
+</view>

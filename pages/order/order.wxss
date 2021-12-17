@@ -1,0 +1,66 @@
+.content{
+  background-color: #f6f7fb;
+  width:100%;
+}
+.cont{
+  background-color: #fff;
+  width:690rpx;
+  margin:24rpx auto;
+  padding-left:24rpx;
+  box-sizing: border-box;
+}
+.line1{
+  border-bottom:1px solid #e8ebf3;
+  line-height: 90rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC, PingFangSC-Medium;
+  font-weight: 600;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+.line1 .oid{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.type{
+  width: 110rpx;
+  line-height: 56rpx;
+  border-radius: 100rpx 0rpx 0rpx 100rpx;
+  text-align: center;
+  color:#fff;
+  font-weight: normal;
+}
+.type1{
+  background-color: #0FCE8C;
+}
+.type2{
+  background-color: #075FFF;
+}
+.type3{
+  background-color: #e6a23c;
+}
+.type4{
+  background-color: #868BA2;
+}
+.line2{
+  padding:20rpx 0;
+}
+.titles{
+  font-size: 28rpx;
+  font-family: PingFangSC, PingFangSC-Regular;
+  font-weight: 400;
+  color: #868ba2;
+  line-height: 70rpx;
+}
+.msg{
+  color:#000;
+  font-weight: 500;
+}
+.none{
+  text-align: center;
+  margin-top:200px;
+}
+

@@ -1,0 +1,18 @@
+<view class="box">
+  <view class="content">
+    <view class="line first" bindtap="handleClear">
+      <text class="title">清除本地缓存</text>
+      <view class="right">
+        <text class="des">{{cache}}</text>
+        <image src="/assets/image/arrow-right-.png" class="iconts2"></image>
+      </view>
+    </view>
+    <view class="line" bindtap="handleLogout">
+      <text class="title">退出登录</text>
+      <image src="/assets/image/arrow-right-.png" class="iconts2"></image>
+    </view>
+  </view>
+</view>
+<van-dialog id="van-dialog" />
+
+

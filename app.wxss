@@ -1,0 +1,72 @@
+@import 'miniprogram_npm/@vant/weapp/common/index.wxss';
+
+page {
+  height: 100%;
+  background-color: #F6F7FB;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+}
+image{
+  display: block;
+}
+.flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.justify-center{
+  justify-content: center;
+}
+.justify-between{
+  justify-content: space-between;
+}
+.justify-around{
+  justify-content: space-around;
+}
+.align-center{
+  align-items: center;
+}
+/* 自定义弹窗 */
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.modal-wrapper .mw-inner{
+  width: 640rpx;
+  padding: 40rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+.modal-wrapper .mw-inner .icon-close{
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+}
+.modal-wrapper .mw-inner .title{
+  font-size: 36rpx;
+  font-family: PingFangSC, PingFangSC-Medium;
+  font-weight: 500;
+  color: #000000;
+  line-height: 50rpx;
+}
+.modal-wrapper .mw-inner .footer{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-wrapper .mw-inner .footer .btn{
+  width: 264rpx;
+  height: 80rpx;
+}

@@ -1,0 +1,10 @@
+<!--pages/function/function.wxml-->
+<view class="box">
+  <image src="/assets/image/function.png" class="imgs"></image>
+  <view class="content">
+    <view class="title">{{current.title}}</view>
+    <view class="main">
+      内容
+    </view>
+  </view>
+</view>

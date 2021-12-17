@@ -1,0 +1,46 @@
+<view class="logo-text-wrap">
+  <image class="sheet" src="/assets/image/sheet.png" />
+  <image class="lt" src="/assets/image/logo-text.png" />
+</view>
+<view class="auth-button" hidden="{{!isHiddenForm}}">
+  <van-button type="info" custom-style="width: 600rpx;height: 98rpx;" bind:click="handleWXLogin">微信快捷登录</van-button>
+  <view class="switch-account" bindtap="switchForm" data-key="1">账号登录</view>
+</view>
+<view class="account-form" hidden="{{ isHiddenForm }}">
+  <van-cell-group>
+    <van-field
+      model:value="{{ loginMobile }}"
+      placeholder="请输入账号"
+      size="large"
+      maxlength="11"
+      clearable
+    />
+    <van-field
+      model:value="{{ loginPwd }}"
+      password
+      placeholder="请输入密码"
+      size="large"
+      clearable
+    />
+  </van-cell-group>
+  <van-button type="info" disabled="{{ !loginMobile.length || !loginPwd.length }}" block custom-style="margin-top: 70rpx" bind:click="handleAccountLogin">登录</van-button>
+  <view class="switch-account" bindtap="switchForm" data-key="2">微信快捷登录</view>
+</view>
+<!-- 手动输入手机号进行绑定 -->
+<van-overlay show="{{ isShowBindMobile }}">
+  <view class="modal-wrapper">
+    <view class="mw-inner">
+      <van-icon class="icon-close" name="cross" bind:click="showBindMobile"/>
+      <view class="title">手机号绑定</view>
+      <view class="content">
+        <view class="input-row">
+          <text>手机号</text>
+          <input type="number" data-filed="mobile" value="{{mobile}}" placeholder="输入绑定的手机号" maxlength="11" bindinput="handleInputChange"/>
+        </view>
+      </view>
+      <view class="footer">
+        <van-button custom-class="btn" type="info" bind:click="handleBindMobile">绑定</van-button>
+      </view>
+    </view>
+  </view>
+</van-overlay>

@@ -1,0 +1,15 @@
+<view class="msg-list" wx:if="{{ messages.length}}">
+  <block wx:for="{{ messages }}" wx:key="index">
+    <view class="item" data-item="{{ item }}" bindtap="gotoOrderInfo">
+      <image src="/assets/image/icon-{{item.newsType === 'production' ? 'product' : 'inspect'}}.png"  class="icon"/>
+      <view class="right">
+        <view class="rt">
+          <text class="title">{{ item.newsTitle }}</text>
+          <text class="time">{{ item.newsTime }}</text>
+        </view>
+        <view class="label">{{ item.newsContent}}</view>
+      </view>
+    </view>
+  </block>
+</view>
+<van-empty description="暂无消息" wx:else/>

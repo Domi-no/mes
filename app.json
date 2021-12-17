@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/authorize/index",
+    "pages/user/index",
+    "pages/userInfo/userInfo",
+    "pages/order/order",
+    "pages/help/help",
+    "pages/orderInfo/index",
+    "pages/setting/setting",
+    "pages/richText/index",
+    "pages/message/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "智能MES工厂",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#9EA5BA",
+    "selectedColor": "#075FFF",
+    "list": [
+      {
+        "iconPath": "/assets/image/icon-home.png",
+        "selectedIconPath": "/assets/image/icon-home-active.png",
+        "text": "首页",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "iconPath": "/assets/image/icon-user.png",
+        "selectedIconPath": "/assets/image/icon-user-active.png",
+        "text": "会员中心",
+        "pagePath": "pages/user/index"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

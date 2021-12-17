@@ -1,0 +1,209 @@
+.suspend-wrap{
+  position: relative;
+  margin-top: -420rpx;
+}
+.index-bg{
+  width: 100%;
+  height: 420rpx;
+}
+.logo-text-icon-wrap{
+  width: 690rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 20rpx;
+}
+.logo-text-icon-wrap .text{
+  width: 210rpx;
+  height: 77rpx;
+}
+.logo-text-icon-wrap .icon{
+  width: 44rpx;
+  height: 44rpx;
+  margin-left: 56rpx;
+}
+.count-wrap{
+  width: 690rpx;
+  background: linear-gradient(135deg,#32b6ff, #1e4bff);
+  margin: 0 auto;
+}
+.count-wrap .all-number{
+  height: 188rpx;
+  padding-left: 30rpx;
+  position: relative;
+}
+.count-wrap .all-number .label{
+  line-height: 80rpx;
+  font-family: PingFangSC, PingFangSC-Regular;
+  font-weight: 400;
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.84);
+}
+.count-wrap .all-number .value{
+  font-size: 68rpx;
+  font-family: PingFangSC, PingFangSC-Medium;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 95rpx;
+}
+.count-wrap .all-number image{
+  position: absolute;
+  top: 39rpx;
+  right: 0;
+  width: 194rpx;
+  height: 149rpx;
+}
+.count-wrap .item-number{
+  display: flex;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg,#32b6ff, #1e4bff);
+}
+.count-wrap .item-number .item{
+  width: 50%;
+  height: 125rpx;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.count-wrap .item-number .item:nth-child(1)::after{
+  content: '';
+  position: absolute;
+  top: 20rpx;
+  right: 0;
+  width: 1px;
+  height: 80rpx;
+  background: rgba(255,255,255,0.20);
+}
+.count-wrap .item-number .item:nth-child(2)::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 315rpx;
+  height: 1rpx;
+  background: rgba(255,255,255,0.20);
+}
+.count-wrap .item-number .item:nth-child(3)::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 315rpx;
+  height: 1rpx;
+  background: rgba(255,255,255,0.20);
+}
+.count-wrap .item-number .item:nth-child(4)::after{
+  content: '';
+  position: absolute;
+  top: 20rpx;
+  left: 0;
+  width: 1px;
+  height: 80rpx;
+  background: rgba(255,255,255,0.20);
+}
+.count-wrap .item-number .item .label{
+  line-height: 60rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC, PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(255,255,255,0.84);
+}
+.count-wrap .item-number .item .value{
+  font-size: 32rpx;
+  font-family: PingFangSC, PingFangSC-Medium;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 45rpx;
+}
+.list-wrap{
+  padding: 30rpx;
+}
+.list-wrap .title{
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.list-wrap .title .left-text{
+  font-size: 34rpx;
+  font-family: PingFangSC, PingFangSC-Medium;
+  font-weight: 500;
+  color: #000000;
+  line-height: 48rpx;
+}
+.list-wrap .title .right-text{
+  font-size: 28rpx;
+  font-family: PingFangSC, PingFangSC-Regular;
+  font-weight: 400;
+  color: #b9c2d7;
+  line-height: 40rpx;
+  margin-right: 14rpx;
+}
+.list-wrap .item{
+  background: #fff;
+  position: relative;
+  margin-bottom: 30rpx;
+}
+.list-wrap .item:last-child{
+  margin-bottom: 0;
+}
+.list-wrap .item .order-number{
+  height: 97rpx;
+  line-height: 97rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC, PingFangSC-Medium;
+  font-weight: 600;
+  color: #000000;
+  padding: 0 30rpx;
+  border-bottom: 1px solid #E8EBF3;
+  margin-bottom: 30rpx;
+}
+.list-wrap .item .label,
+.list-wrap .item .value
+{
+  font-size: 28rpx;
+  font-family: PingFangSC, PingFangSC-Regular;
+}
+.list-wrap .item .label{
+  color: #868BA2;
+  font-weight: 400;
+}
+.list-wrap .item .value{
+  flex: 1;
+  color: #000000;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.list-wrap .item .row{
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx 30rpx;
+}
+.list-wrap .item .status{
+  position: absolute;
+  top: 21rpx;
+  right:0;
+  width: 110rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  border-radius: 100rpx 0rpx 0rpx 100rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC, PingFangSC-Medium;
+  font-weight: 500;
+  color: #ffffff;
+}
+.list-wrap .item .s1{
+  background-color: #0FCE8C;
+}
+.list-wrap .item .s2{
+  background-color: #075FFF;
+}
+.list-wrap .item .s3{
+  background-color: #e6a23c;
+}
+.list-wrap .item .s4{
+  background-color: #868BA2;
+}

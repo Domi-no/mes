@@ -1,0 +1,89 @@
+<image src="/assets/image/index-bg.png" class="index-bg" />
+<view class="suspend-wrap">
+  <view style="height: {{ headerHeight }}px"></view>
+  <view class="logo-text-icon-wrap">
+    <image src="/assets/image/logo-text-desc.png" class="text"/>
+    <view class="flex align-center justify-between">
+      <image src="/assets/image/scanner.png" class="icon" bindtap="handleScanner"/>
+      <image src="/assets/image/message.png" class="icon" bindtap="gotoMessage"/>
+    </view>
+  </view>
+  <view class="count-wrap" wx:if="{{ userinfo.roleId === 'production' }}">
+    <view class="all-number">
+      <view class="label">本月参与订单数</view>
+      <view class="value">{{ productor.monthOrder || 0 }}</view>
+      <image src="/assets/image/all-number.png"/>
+    </view>
+    <view class="item-number">
+      <view class="item">
+        <view class="label">今日成品数</view>
+        <view class="value">{{ productor.todayAualified || 0 }}</view>
+      </view>
+      <view class="item">
+        <view class="label">今日废品数</view>
+        <view class="value">{{ productor.todayUnqualified || 0 }}</view>
+      </view>
+      <view class="item">
+        <view class="label">本月成品数</view>
+        <view class="value">{{ productor.monthAualified || 0 }}</view>
+      </view>
+      <view class="item">
+        <view class="label">本月废品数</view>
+        <view class="value">{{ productor.monthUnqualified || 0}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="count-wrap" wx:else>
+    <view class="all-number">
+      <view class="label">本月参与订单数</view>
+      <view class="value">{{ inspector.monthOrder || 0 }}</view>
+      <image src="/assets/image/all-number.png"/>
+    </view>
+    <view class="item-number">
+      <view class="item">
+        <view class="label">今日质检数</view>
+        <view class="value">{{ inspector.todayQuality || 0 }}</view>
+      </view>
+      <view class="item">
+        <view class="label">本月质检数</view>
+        <view class="value">{{ inspector.monthQuality || 0 }}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="list-wrap" wx:if="{{ orders.length }}">
+  <view class="title">
+    <text class="left-text">待处理产品订单</text>
+    <view class="flex align-center justify-between" bindtap="gotoOrderList">
+      <text class="right-text">查看全部</text>
+      <van-icon name="arrow" color="#b9c2d7"/>
+    </view>
+  </view>
+  <view>
+    <view wx:for="{{ orders }}" wx:key="index" class="item" data-oid="{{ item.productionOrderId }}" bindtap="gotoOrderInfo">
+      <view wx:if="{{ item.productionStatus == '1'}}" class="s3 status">待处理</view>
+      <view wx:if="{{ item.productionStatus == '2'}}" class="s1 status">生产中</view>
+      <view wx:if="{{ item.productionStatus == '3'}}" class="s3 status">待质检</view>
+      <view wx:if="{{ item.productionStatus == '4'}}" class="s2 status">质检中</view>
+      <view wx:if="{{ item.productionStatus == '5'}}" class="s4 status">已结束</view>
+      <view class="order-number van-ellipsis">生产订单号：{{ item.productionOrderId }}</view>
+      <view class="row">
+        <text class="label">产品编号：</text>
+        <text class="value">{{ item.proId }}</text>
+      </view>
+      <view class="row">
+        <text class="label">产品名称：</text>
+        <text class="value">{{ item.proName }}</text>
+      </view>
+      <view class="row">
+        <text class="label">订单数量：</text>
+        <text class="value">{{ item.productionNumber }}</text>
+      </view>
+      <view class="row">
+        <text class="label">交货日期：</text>
+        <text class="value">{{ item.deliveryTime }}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<van-empty description="暂无订单" wx:else/>

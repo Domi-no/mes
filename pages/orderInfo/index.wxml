@@ -1,0 +1,350 @@
+<view class="step-wrap">
+  <image src="/assets/image/steps.png" />
+  <view class="sw">
+    <van-steps
+      steps="{{ steps }}"
+      active="{{ currentStepIdx }}"
+      active-icon="success"
+      active-color="#075FFF"
+      bind:click-step="clickStep"
+    />
+  </view>
+</view>
+<view class="info-wrap">
+  <view class="base-info common-wrap">
+    <view class="title"><text>基础信息</text></view>
+    <view class="row">
+      <text class="label">生产订单号：</text>
+      <text class="value">{{ orderinfo.baseInfo.productionOrderId }}</text>
+    </view>
+    <view class="row">
+      <text class="label">工序编号：</text>
+      <text class="value">{{ orderinfo.baseInfo.currentProcessId }}</text>
+    </view>
+    <view class="row">
+      <text class="label">产品名称：</text>
+      <text class="value">{{ orderinfo.baseInfo.proName }}</text>
+    </view>
+    <view class="row">
+      <text class="label">产品编号：</text>
+      <text class="value">{{ orderinfo.baseInfo.proId }}</text>
+    </view>
+    <view class="row">
+      <text class="label">图纸编号：</text>
+      <text class="value">{{ orderinfo.baseInfo.drawingNo }}</text>
+    </view>
+    <view class="row">
+      <text class="label">订单数量：</text>
+      <text class="value">{{ orderinfo.baseInfo.productionNumber }}</text>
+    </view>
+  </view>
+  <view class="common-wrap">
+    <view class="title"><text>生产信息</text></view>
+    <view class="row">
+      <text class="label">零件名称：</text>
+      <text class="value">{{ orderinfo.productionInfo.name }}</text>
+    </view>
+    <view class="row">
+      <text class="label">计划总生产数量：</text>
+      <text class="value">{{ orderinfo.productionInfo.plannedNumber }}</text>
+    </view>
+    <view class="row">
+      <text class="label">待生产剩余数量：</text>
+      <text class="value">{{ orderinfo.productionInfo.surplusNumber }}</text>
+    </view>
+    <view class="row">
+      <text class="label">计划时间：</text>
+      <text class="value">{{ orderinfo.productionInfo.productionStartTime }} ~ {{ orderinfo.productionInfo.productionCompleteTime }}</text>
+    </view>
+    <view class="row">
+      <text class="label">生产总时长：</text>
+      <text class="value">{{ orderinfo.productionInfo.totalDuration }}小时</text>
+    </view>
+  </view>
+  <view class="common-wrap" wx:if="{{ orderinfo.consumeList.length }}">
+    <view class="title"><text>生产耗材</text></view>
+    <view class="materials-list">
+      <view class="item" wx:for="{{ orderinfo.consumeList }}" wx:key="index">
+        <view class="i-header">
+          <text class="left-text">{{ item.proName }}</text>
+          <text class="right-text">耗材编号：{{ item.proId }}</text>
+        </view>
+        <view class="i-body">
+          <van-image custom-class="image" src="{{ item.proPicture }}" />
+          <view class="flex-1">
+            <view class="ib-row">
+              <view class="label">分类：</view>
+              <view class="value">{{ item.proSortName }}</view>
+            </view>
+            <view class="ib-row">
+              <view class="label">计划消耗数量：</view>
+              <view class="value">{{ item.plannedNumber }}</view>
+            </view>
+            <view class="ib-row">
+              <view class="label">实际消耗数量：</view>
+              <view class="value">{{ item.actualNumber }}</view>
+            </view>
+          </view>
+        </view>
+        <view class="i-footer" wx:if="{{ isProductor && scannerRes.modify }}">
+          <van-button round plain type="info" size="small" data-eid="{{ item.proId }}" data-key="2" bind:click="showExpend">还回耗材</van-button>
+          <van-button round type="info" size="small" data-eid="{{ item.proId }}" data-key="1" custom-style="margin-left:30rpx" bind:click="showExpend">领取耗材</van-button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="common-wrap" wx:if="{{ !isProductor }}">
+    <view class="title"><text>质检信息</text></view>
+    <view class="quality-table">
+      <view class="t1 t-wrap">
+        <view class="t-body">
+          <view class="tb-column">
+            <text class="value">{{ orderinfo.productionInfo.qualified || 0 }}</text>
+            <text class="label">总良品数量</text>
+          </view>
+          <view class="tb-column">
+            <text class="value">{{ orderinfo.productionInfo.unqualified || 0 }}</text>
+            <text class="label">总次品数量</text>
+          </view>
+          <view class="tb-column">
+            <text class="value">{{ orderinfo.productionInfo.qualifiedRate || 0 }}</text>
+            <text class="label">总合格率(%)</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{ orderinfo.qualityList.length }}">
+        <view class="t2 t-wrap" wx:for="{{ orderinfo.qualityList }}" wx:key="index">
+          <view class="t-header">
+            <text class="left-text">质检人：{{ item.qualityName }}</text>
+            <text class="right-text">{{ item.qualityTime }}</text>
+          </view>
+          <view class="t-header">{{ item.productionName }}</view>
+          <view class="t-body">
+            <view class="tb-column">
+              <text class="value">{{ item.qualified || 0 }}</text>
+              <text class="label">良品数量</text>
+            </view>
+            <view class="tb-column">
+              <text class="value">{{ item.unqualified || 0 }}</text>
+              <text class="label">次品数量</text>
+            </view>
+            <view class="tb-column">
+              <text class="value">{{ item.qualifiedRate || 0 }}</text>
+              <text class="label">合格率(%)</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="common-wrap" wx:if="{{ !isProductor }}">
+    <view class="title"><text>待质检信息</text></view>
+    <view class="row">
+      <text class="label">质检人姓名：</text>
+      <text class="value">{{ waitQuliators }}</text>
+    </view>
+    <view class="row">
+      <text class="label">申请质检数：</text>
+      <text class="value">{{ orderinfo.pending.qualityNumber }}</text>
+    </view>
+  </view>
+  <view class="common-wrap" wx:if="{{ isProductor && scannerRes.modify }}">
+    <view class="title cmi"><text>完成订单</text></view>
+    <view class="complate-input">
+      <text class="label">完成数量</text>
+      <input type="number" placeholder="请输入数量" placeholder-style="color:#C3C7D4" type="number" data-filed="completeNum" value="{{ completeNum }}" bindinput="handleInputChange"/>
+    </view>
+  </view>
+</view>
+<view class="fill-in-empty" wx:if="{{ scannerRes.modify || !isProductor }}"></view>
+<view class="fixed-footer" wx:if="{{ scannerRes.modify || !isProductor }}">
+  <van-button wx:if="{{ isProductor }}" plain type="info" custom-class="bottom-fixed-btn-v2" bind:click="handleShiftOver">交接班</van-button>
+  <van-button wx:if="{{ !isProductor }}" plain type="info" custom-class="bottom-fixed-btn-v2" bind:click="clickWarehousing">成品入库</van-button>
+  <van-button wx:if="{{ !isProductor && isScanCode }}" plain type="info" custom-class="bottom-fixed-btn-v2" bind:click="clickQuality">质检</van-button>
+  <van-button  disabled="{{productionClick}}" wx:if="{{ !isProductor }}"  type="info" custom-class="bottom-fixed-btn-v2" bind:click="clickProductionEnd" >生产结束</van-button>
+  <van-button disabled="{{completeClick}}" type="info" custom-class="bottom-fixed-btn-v2" bind:click="clickConfirmCompletion">确认完成</van-button>
+</view>
+
+<!-- 领取/还回耗材弹窗 -->
+<van-overlay show="{{ isShowExpend }}" z-index="999">
+  <view class="modal-wrapper">
+    <view class="mw-inner">
+      <van-icon class="icon-close" name="cross" bind:click="closeExpend"/>
+      <view class="title">{{ expendType === '1' ? '领取' : '还回'}}耗材</view>
+      <view class="content mwc-expend">
+        <view class="input-row">
+          <text class="label">请输入需要{{ expendType === '1' ? '领取' : '还回'}}的耗材数量</text>
+          <input type="number" data-filed="expendNum" value="{{ expendNum }}" placeholder="请输入数量" bindinput="handleInputChange"/>
+        </view>
+      </view>
+      <view class="footer">
+        <van-button custom-class="btn" bind:click="closeExpend">取消</van-button>
+        <van-button custom-class="btn" type="info" disabled="{{ expendNum.length === 0 }}" bind:click="submitExpend">确定</van-button>
+      </view>
+    </view>
+  </view>
+</van-overlay>
+<!-- 质检信息弹窗 -->
+<van-overlay show="{{ isShowQuality }}" z-index="999">
+  <view class="modal-wrapper">
+    <view class="mw-inner">
+      <van-icon class="icon-close" name="cross" bind:click="closeQuality"/>
+      <view class="title">质检信息</view>
+      <view class="content mwc-quality">
+        <view class="names">生产人员：{{ waitQuliators }}</view>
+        <view class="input-row">
+          <text class="label">良品数量</text>
+          <input type="number" data-filed="goodNum" value="{{ goodNum }}" placeholder="请输入数量" bindinput="handleInputChange"/>
+        </view>
+        <view class="input-row">
+          <text class="label">次品数量</text>
+          <input type="number" data-filed="badNum" value="{{ badNum }}" placeholder="请输入数量" bindinput="handleInputChange"/>
+        </view>
+      </view>
+      <view class="footer">
+        <van-button custom-class="btn" bind:click="closeQuality">取消</van-button>
+        <van-button custom-class="btn" type="info" disabled="{{ goodNum.length === 0 || badNum.length === 0 }}" bind:click="nextToConsume">{{ hasConsumes ? '下一步' : '入库'}}</van-button>
+      </view>
+    </view>
+  </view>
+</van-overlay>
+<!-- 耗材查验弹窗 -->
+<van-overlay show="{{ isShowConsume }}" z-index="999">
+  <view class="modal-wrapper">
+    <view class="mw-inner">
+      <van-icon class="icon-close" name="cross" bind:click="closeConsume"/>
+      <view class="title">耗材查验</view>
+      <view class="content mwc-consume">
+        <block
+          wx:for="{{ productors }}"
+          wx:for-index="pidx"
+          wx:for-item="productor"
+          wx:key="pidx"
+        >
+          <view class="names">生产人员：{{ productor.productionName}}</view>
+            <block
+              wx:for="{{ consumes }}"
+              wx:for-index="cidx"
+              wx:for-item="consume"
+              wx:key="cidx"
+            >
+            <view class="i-body">
+              <van-image custom-class="image" src="{{ consume.proPicture }}" />
+              <view class="flex-1">
+                <view class="ib-row">
+                  <view class="label">耗材编号：</view>
+                  <view class="value">{{ consume.proId }}</view>
+                </view>
+                <view class="ib-row">
+                  <view class="label">分类：</view>
+                  <view class="value">{{ consume.proSortName }}</view>
+                </view>
+                <view class="ib-row">
+                  <view class="label">计划消耗数量：</view>
+                  <view class="value">{{ consume.plannedNumber }}</view>
+                </view>
+              </view>
+            </view>
+            <view class="input-row">
+              <text class="label">实际消耗</text>
+              <input type="number" value="{{ consume.actual }}" placeholder="请输入数量" data-cidx="{{ cidx }}" data-pidx="{{ pidx }}" bindinput="inputConsume"/>
+            </view>
+          </block>
+        </block>
+      </view>
+      <view class="footer">
+        <van-button custom-class="btn" bind:click="closeConsume">取消</van-button>
+        <van-button custom-class="btn" type="info" bind:click="nextToStorage">下一步</van-button>
+      </view>
+    </view>
+  </view>
+</van-overlay>
+<!-- 产品入库弹窗 -->
+<van-overlay show="{{ isShowStorage }}" z-index="999">
+  <view class="modal-wrapper">
+    <view class="mw-inner">
+      <van-icon class="icon-close" name="cross" bind:click="closeStorage"/>
+      <view class="title">剩余耗材申请入库</view>
+      <view class="content mwc-consume">
+        <block
+          wx:for="{{ productors }}"
+          wx:for-index="pidx"
+          wx:for-item="productor"
+          wx:key="pidx"
+        >
+          <view class="names">生产人员：{{ productor.productionName}}</view>
+            <block
+              wx:for="{{ consumes }}"
+              wx:for-index="cidx"
+              wx:for-item="consume"
+              wx:key="cidx"
+            >
+            <view class="i-body">
+              <van-image custom-class="image" src="{{ consume.proPicture }}" />
+              <view class="flex-1">
+                <view class="ib-row">
+                  <view class="label">耗材编号：</view>
+                  <view class="value">{{ consume.proId }}</view>
+                </view>
+                <view class="ib-row">
+                  <view class="label">分类：</view>
+                  <view class="value">{{ consume.proSortName }}</view>
+                </view>
+                <view class="ib-row">
+                  <view class="label">计划消耗数量：</view>
+                  <view class="value">{{ consume.plannedNumber }}</view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </block>
+      </view>
+      <view class="footer">
+        <van-button custom-class="btn" bind:click="closeStorage">取消</van-button>
+        <van-button custom-class="btn" type="info" bind:click="submitQuality">入库</van-button>
+      </view>
+    </view>
+  </view>
+</van-overlay>
+<!-- 生成订单扫码进入弹窗 -->
+<van-overlay show="{{ scannerRes.popup }}" z-index="999">
+  <view class="modal-wrapper">
+    <view class="mw-inner mwc-production">
+      <van-icon class="icon-close" name="cross" bind:click="closeProduction"/>
+      <view class="title">工序名称</view>
+      <view class="content ">
+        <view class="i-body">
+          <view class="ib-row">
+            <view class="ibr-label">产品名称：</view>
+            <view class="ibr-value">{{ scannerRes.proName }}</view>
+          </view>
+          <view class="ib-row">
+            <view class="ibr-label">工序：</view>
+            <view class="ibr-value">{{ scannerRes.currentProcessName }}</view>
+          </view>
+          <view class="ib-row">
+            <view class="ibr-label">订单编号：</view>
+            <view class="ibr-value">{{ scannerRes.productionOrderId }}</view>
+          </view>
+          <view class="ib-row">
+            <view class="ibr-label">需求数量：</view>
+            <view class="ibr-value">{{ scannerRes.plannedNumber }}</view>
+          </view>
+          <view class="ib-row">
+            <view class="ibr-label">开工时间：</view>
+            <view class="ibr-value">{{ scannerRes.startTime }}</view>
+          </view>
+        </view>
+        <view class="input-row">
+            <text class="label">完成数量</text>
+            <input type="number" placeholder="请输入数量" placeholder-style="color:#C3C7D4" type="number" data-filed="completeNum" value="{{ completeNum }}" bindinput="handleInputChange"/>
+          </view>
+      </view>
+      <view class="footer">
+        <van-button custom-class="p-btn" bind:click="closeProduction">取消</van-button>
+        <van-button custom-class="p-btn shift-btn" bind:click="handleShiftOver">交接</van-button>
+        <van-button custom-class="p-btn" type="info" bind:click="submitComplete">确定</van-button>
+      </view>
+    </view>
+  </view>
+</van-overlay>

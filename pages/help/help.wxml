@@ -1,0 +1,11 @@
+<view class="box">
+  <view class="content">
+    <block wx:for="{{navs}}" wx:key="index">
+      <view class="line first" data-index="{{index}}"  bindtap="handleItem">
+        <text class="title">{{item.title}}</text>
+        <image src="/assets/image/arrow-right-.png" class="iconts2"></image>
+      </view>
+    </block>
+  </view>
+</view>
+

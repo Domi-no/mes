@@ -1,0 +1,35 @@
+<view class="head">
+  <image src='/assets/image/head-bg.png' class="img"></image>
+  <view class="head-img">
+    <view class="left">
+      <image src="/assets/image/avatar.png" class="left-img"></image>
+    </view>
+    <view class="right" wx:if="{{userInfo.username}}">
+      <view class="names">
+        <text class="username">{{userInfo.username}}</text>
+        <view class="types">{{userInfo.roleName}}</view>
+      </view>
+      <view class="factory">厂区：
+        <text>{{userInfo.depName}}</text>
+      </view>
+    </view>
+    <view class="right names username" wx:else>请登录</view>
+  </view>
+</view>
+<view class="main">
+  <view class="top" wx:for="{{icons}}" wx:key="icon" bindtap="goInfo" data-item="{{item}}">
+    <view class="content">
+      <image src="{{item.icon}}" class="iconts"></image>
+      <text>{{item.msg}}</text>
+    </view>
+    <image src="/assets/image/arrow-right-.png" class="iconts2"></image>
+  </view>
+  <!-- <view class="line"></view> -->
+  <view class="top" wx:for="{{icons2}}" wx:key="msg" bindtap="goInfo" data-item="{{item}}">
+    <view class="content">
+      <image src="{{item.icon}}" class="iconts"></image>
+      <text>{{item.msg}}</text>
+    </view>
+    <image src="/assets/image/arrow-right-.png" class="iconts2"></image>
+  </view>
+</view>

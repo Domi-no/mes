@@ -1,0 +1,38 @@
+<view>
+  <view class="top">
+    <van-search
+      value="{{ val }}"
+      shape="round"
+      background="#fff"
+      placeholder="搜索生产订单号、产品名称"
+      bind:blur="onBlur"
+      bind:search="handleSearch"
+    />
+  </view>
+  <view class="choose">
+    <van-dropdown-menu  active-color="#1989fa">
+      <van-dropdown-item title="订单状态"  bind:change="changeOStatus" value="{{ sStatus }}" options="{{ ostatus }}" />
+      <!-- <van-dropdown-item title="产品分类"  bind:change="changePType" value="{{ sType }}" options="{{ ptypes }}" /> -->
+    </van-dropdown-menu>  
+  </view>
+</view>
+<view class="content" wx:if="{{ orders.length }}">
+  <view class="cont" wx:for="{{ orders }}" wx:key="index" data-oid="{{ item.productionOrderId }}" bindtap="gotoOrderInfo">
+    <view class="line1">
+      <view class="oid">生产订单号：{{ item.productionOrderId }}</view>
+      <view wx:if="{{ item.productionStatus == '1'}}" class="type3 type">待处理</view>
+      <view wx:if="{{ item.productionStatus == '2'}}" class="type1 type">生产中</view>
+      <view wx:if="{{ item.productionStatus == '3'}}" class="type3 type">待质检</view>
+      <view wx:if="{{ item.productionStatus == '4'}}" class="type2 type">质检中</view>
+      <view wx:if="{{ item.productionStatus == '5'}}" class="type4 type">已结束</view>
+    </view>
+    <view class="line2">
+      <view class="titles">产品编号：<text class="msg">{{ item.proId }}</text></view>
+      <view class="titles">产品名称：<text class="msg">{{ item.proName }}</text></view>
+      <view class="titles">订单数量：<text class="msg">{{ item.productionNumber }}</text></view>
+      <view class="titles">交货日期：<text class="msg">{{ item.deliveryTime }}</text></view>
+    </view>
+  </view>
+</view>
+<van-empty description="暂无订单" wx:else/>
+   
