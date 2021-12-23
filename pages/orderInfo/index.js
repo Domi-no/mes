@@ -54,7 +54,7 @@ Page({
     const { isProductor,oid } = this.data;
     const { data } = await queryOrderInfo(oid,pid);
     const { currentProcessId, productionStatus} = data.baseInfo;
-    const { processList, consumeList, pending } = data;
+    const { processList, consumeList, pending ,productionInfo } = data;
     // 当前工序步骤索引值
     const currentStepIdx = processList.findIndex(p => p.processId === currentProcessId);
     
@@ -76,7 +76,8 @@ Page({
     pid ? '' :this.setData({
       currentStepIdx: productionStatus != '5' ? currentStepIdx : steps.length - 1,
     })
-    productionStatus == 5 ? this.setData({ completeClick:true,productionClick:true }):'';
+    productionStatus == 5 ? this.setData({ productionClick:true }):this.setData({ productionClick:false });
+    productionInfo.status == 1 ? this.setData({ completeClick:true}):this.setData({ completeClick:false});
   },
   // 交接班
   async handleShiftOver(){
@@ -106,7 +107,7 @@ Page({
       badNum: '',
       isShowQuality: !this.data.isShowQuality
     });
-    wx.showToast({ title: '操作成功', icon: 'success'});
+    console.log(data);
   },
   closeQuality(){
     this.setData({ isShowQuality: !this.data.isShowQuality });
@@ -139,6 +140,12 @@ Page({
     } else {
       this.submitQuality();
     }
+    
+    // wx.showToast({ title: '操作成功', icon: 'success'});
+    this.setData({
+      isShowQuality: !this.data.isShowQuality
+    })
+    
   },
   closeConsume(){
     this.setData({ isShowConsume: !this.data.isShowConsume });
@@ -177,6 +184,7 @@ Page({
     }
     await qualityHandler(doc);
     wx.showToast({ title: '操作成功', icon: 'success' });
+    this._queryOrderInfo()
     // this.setData({ isShowStorage: !isShowStorage });
     // setTimeout(() => {
     //   wx.navigateBack();
@@ -311,9 +319,12 @@ Page({
     const {productionOrderId } = this.data.orderinfo.baseInfo;
     await productionEnd(productionOrderId)
     wx.showToast({ title: '操作成功', icon: 'success'});
-    setTimeout(() => {
-      wx.navigateBack();
-    }, 750);
+    this.setData({
+      productionClick:true
+    })
+    // setTimeout(() => {
+    //   wx.navigateBack();
+    // }, 750);
   },
   // 步骤条点击
   clickStep({detail}){

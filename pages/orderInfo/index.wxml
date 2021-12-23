@@ -156,8 +156,8 @@
     </view>
   </view>
 </view>
-<view class="fill-in-empty" wx:if="{{ scannerRes.modify || !isProductor }}"></view>
-<view class="fixed-footer" wx:if="{{ scannerRes.modify || !isProductor }}">
+<view class="fill-in-empty" wx:if="{{ isScanCode }}"></view>
+<view class="fixed-footer" wx:if="{{ isScanCode }}">
   <van-button wx:if="{{ isProductor }}" plain type="info" custom-class="bottom-fixed-btn-v2" bind:click="handleShiftOver">交接班</van-button>
   <van-button wx:if="{{ !isProductor }}" plain type="info" custom-class="bottom-fixed-btn-v2" bind:click="clickWarehousing">成品入库</van-button>
   <van-button wx:if="{{ !isProductor && isScanCode }}" plain type="info" custom-class="bottom-fixed-btn-v2" bind:click="clickQuality">质检</van-button>

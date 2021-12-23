@@ -3,7 +3,8 @@
   <view style="height: {{ headerHeight }}px"></view>
   <view class="logo-text-icon-wrap">
     <image src="/assets/image/logo-text-desc.png" class="text"/>
-    <view class="flex align-center justify-between">
+    <view class="flex align-center justify-between relative">
+      <view class="circle" wx:if="{{productor.unreadNmber||inspector.unreadNmber}}"></view>
       <image src="/assets/image/scanner.png" class="icon" bindtap="handleScanner"/>
       <image src="/assets/image/message.png" class="icon" bindtap="gotoMessage"/>
     </view>
